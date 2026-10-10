@@ -1,3 +1,4 @@
+```java
 package com.anurag.lostfound.controller;
 
 import com.anurag.lostfound.entity.Item;
@@ -11,135 +12,70 @@ import java.util.List;
 @RestController
 @RequestMapping("/items")
 @CrossOrigin(
-        origins = {
-                "http://localhost:5173",
-                "http://localhost:5174"
-        }
+    origins = {
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "https://lost-found-frontend-rose.vercel.app"
+    }
 )
 public class ItemController {
 
     private final ItemService itemService;
 
-
     public ItemController(ItemService itemService) {
-
         this.itemService = itemService;
-
     }
 
-
-    // GET ALL ITEMS
-
+    // Get all items from MySQL
     @GetMapping
     public ResponseEntity<List<Item>> getAllItems() {
-
-        return ResponseEntity.ok(
-                itemService.getAllItems()
-        );
-
+        return ResponseEntity.ok(itemService.getAllItems());
     }
 
-
-    // GET ITEM BY ID
-
+    // Get item by ID
     @GetMapping("/{id}")
-    public ResponseEntity<?> getItem(
-            @PathVariable Long id
-    ) {
-
+    public ResponseEntity<?> getItem(@PathVariable Long id) {
         try {
-
-            return ResponseEntity.ok(
-                    itemService.getItem(id)
-            );
-
+            return ResponseEntity.ok(itemService.getItem(id));
         } catch (Exception e) {
-
-            return ResponseEntity
-                    .badRequest()
-                    .body(e.getMessage());
-
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
-
-    // SEARCH
-
+    // Search items
     @GetMapping("/search")
     public ResponseEntity<List<Item>> searchItems(
-            @RequestParam String name
-    ) {
-
-        return ResponseEntity.ok(
-                itemService.searchItems(name)
-        );
-
+            @RequestParam String name) {
+        return ResponseEntity.ok(itemService.searchItems(name));
     }
 
-
-    // ADD ITEM
-
+    // Add item to MySQL
     @PostMapping
-    public ResponseEntity<Item> addItem(
-            @RequestBody Item item
-    ) {
-
-        return ResponseEntity.ok(
-                itemService.addItem(item)
-        );
-
+    public ResponseEntity<Item> addItem(@RequestBody Item item) {
+        return ResponseEntity.ok(itemService.addItem(item));
     }
 
-
-    // UPDATE ITEM
-
+    // Update item
     @PutMapping("/{id}")
     public ResponseEntity<?> updateItem(
             @PathVariable Long id,
-            @RequestBody Item item
-    ) {
-
+            @RequestBody Item item) {
         try {
-
-            return ResponseEntity.ok(
-                    itemService.updateItem(id, item)
-            );
-
+            return ResponseEntity.ok(itemService.updateItem(id, item));
         } catch (Exception e) {
-
-            return ResponseEntity
-                    .badRequest()
-                    .body(e.getMessage());
-
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
-
-    // DELETE ITEM
-
+    // Delete item
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteItem(
-            @PathVariable Long id
-    ) {
-
+    public ResponseEntity<?> deleteItem(@PathVariable Long id) {
         try {
-
             itemService.deleteItem(id);
-
-            return ResponseEntity.ok(
-                    "Item deleted successfully"
-            );
-
+            return ResponseEntity.ok("Item deleted successfully");
         } catch (Exception e) {
-
-            return ResponseEntity
-                    .badRequest()
-                    .body(e.getMessage());
-
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
-
 }
+```
