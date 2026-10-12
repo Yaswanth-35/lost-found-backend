@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = {
         "http://localhost:5173",
         "http://localhost:5174",
-        "https://lost-found-frontend-rose.vercel.app"
+        "https://lost-found-frontend-udmv.onrender.com"
 })
 public class UserController {
 
