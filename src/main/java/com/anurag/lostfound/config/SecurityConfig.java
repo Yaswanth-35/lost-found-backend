@@ -20,19 +20,15 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session
-                .sessionCreationPolicy(
-                    SessionCreationPolicy.STATELESS
-                )
-            )
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    HttpMethod.OPTIONS, "/**"
-                ).permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers(
                     "/users/register",
                     "/users/user-login",
                     "/users/admin-login"
                 ).permitAll()
+                .requestMatchers("/items", "/items/**").permitAll()
                 .anyRequest().authenticated()
             );
 
